@@ -85,7 +85,7 @@ if verCheck == 'y'
         disp('┃                             版本：1.0    创建于：2017/3/17   ┃');
         disp('┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛');
         disp('┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓');
-        target = input('  请输入接收码（通常这是您的手机号或者QQ号） : ','s');
+        target = input('  请输入接收码（通常这是您的手机号或者QQ号） : ');
         disp('  查询中，请稍候...');
         disp('┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛');
         pause(3)
@@ -94,8 +94,7 @@ if verCheck == 'y'
         while itemCount==0
             for i=(2:1:items)
                 for j=(4:1:5)
-                    mou=c{i,j};
-                    if strcmpi(c{i,j},target)
+                    if c{i,j}==target
                         itemCount=itemCount+1;
                         itemPos=[itemPos,i];
                     end
@@ -108,14 +107,13 @@ if verCheck == 'y'
             disp('┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛');
             disp('┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓');
             disp('  未查询到相关目录，请确认输入。');
-            target = input('  请输入接收码（通常这是您的手机号或者QQ号） : ','s');
+            target = input('  请输入接收码（通常这是您的手机号或者QQ号） : ');
             disp('┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛');
-            pause;
         end
-        itemOutput={};
+        itemOutput=[];
         for i=(1:1:itemCount)
             for j=(1:1:6)
-                itemOutput{i,j}=c{itemPos(i),j};
+                itemOutput(i,j)=c{itemPos(i),j};
             end
         end
         clc
@@ -126,8 +124,8 @@ if verCheck == 'y'
         disp('┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓');
         disp('  当前目录：');
         disp('   序号        名称');
-        for(i=1:1:itemCount)
-            fprintf('    %d          %s  \n',itemOutput{i,1},itemOutput{i,2});
+        for(i=2:1:items)
+            fprintf('    %d          %s  \n',c{i,1},c{i,2});
         end
         disp('┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛');
         choice = input('  请输入序号选择 (数字): ');
